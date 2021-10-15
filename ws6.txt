@@ -1,0 +1,29 @@
+benbow@f6linuxA5:~/ws6$ DATETIME=$(date "+%Y%m%d_%H%M%S")
+benbow@f6linuxA5:~/ws6$ echo $DATETIME
+20211015_045839
+benbow@f6linuxA5:~/ws6$ cp ../a2/PRODUCTS/3822817341.txt PRODUCTS/3822817341.${DATETIME}.txt
+benbow@f6linuxA5:~/ws6$ printf "5\t20\n" >> PRODUCTS/3822817341.20211015_045839.txt
+benbow@f6linuxA5:~/ws6$ ln -s PRODUCTS/3822817341.20211015_045839.txt PRODUCTS/3822817341.LATEST.txt
+benbow@f6linuxA5:~/ws6$ awk '{ sum += $2 } END { if (NR > 0) print sum / NR }' PRODUCTS/3822817341.LATEST.txt
+23.3529
+benbow@f6linuxA5:~/ws6$ nano crontab1
+benbow@f6linuxA5:~/ws6$ head crontab1
+* * * * * awk '{ sum += $2 } END { if (NR > 0) print sum / NR }' /home/benbow/ws6/PRODUCTS/3822817341.LATEST.txt > /home/benbow/ws6/PRODUCTS/3822817341.AVGRATING.txt
+benbow@f6linuxA5:~/ws6$ crontab crontab1
+benbow@f6linuxA5:~/ws6$ ls PRODUCTS/
+3822817341.20211015_045839.txt  3822817341.AVGRATING.txt  3822817341.LATEST.txt
+benbow@f6linuxA5:~/ws6$ ls -lt PRODUCTS/
+total 8
+-rw-rw-r-- 1 benbow benbow  8 Oct 15 05:38 3822817341.AVGRATING.txt
+lrwxrwxrwx 1 benbow benbow 30 Oct 15 05:21 3822817341.LATEST.txt -> 3822817341.20211015_045839.txt
+-rw-rw-r-- 1 benbow benbow 79 Oct 15 04:59 3822817341.20211015_045839.txt
+benbow@f6linuxA5:~/ws6$ ls -lt PRODUCTS/
+total 8
+-rw-rw-r-- 1 benbow benbow  8 Oct 15 05:39 3822817341.AVGRATING.txt
+lrwxrwxrwx 1 benbow benbow 30 Oct 15 05:21 3822817341.LATEST.txt -> 3822817341.20211015_045839.txt
+-rw-rw-r-- 1 benbow benbow 79 Oct 15 04:59 3822817341.20211015_045839.txt
+benbow@f6linuxA5:~/ws6$ crontab -l
+* * * * * awk '{ sum += $2 } END { if (NR > 0) print sum / NR }' /home/benbow/ws6/PRODUCTS/3822817341.LATEST.txt > /home/benbow/ws6/PRODUCTS/3822817341.AVGRATING.txt
+benbow@f6linuxA5:~/ws6$ exit
+Script done, file is ws6.txt
+

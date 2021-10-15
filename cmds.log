@@ -1,0 +1,13 @@
+DATETIME=$(date "+%Y%m%d_%H%M%S")
+echo $DATETIME
+cp ../a2/PRODUCTS/3822817341.txt PRODUCTS/3822817341.${DATETIME}.txt
+printf "5\t20\n" >> PRODUCTS/3822817341.20211015_045839.txt
+ln -s PRODUCTS/3822817341.20211015_045839.txt PRODUCTS/3822817341.LATEST.txt
+awk '{ sum += $2 } END { if (NR > 0) print sum / NR }' PRODUCTS/3822817341.LATEST.txt
+nano crontab1
+head crontab1
+crontab crontab1
+ls -l PRODUCTS/
+ls -lt PRODUCTS/
+ls -lt PRODUCTS/
+crontab -l
